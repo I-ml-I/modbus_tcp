@@ -6,14 +6,14 @@ from pyside2uic import compileUiDir
 
 
 ui_folder = os.path.join('modbus_tcp', 'ui')
-compiled_ui_folder = os.path.join('modbus_tcp')
+compiled_ui_folder = os.path.join('modbus_tcp', 'compiled_ui')
 
 
 @task()
 def compile_ui():
     ''' compile ui files '''
 
-    compileUiDir(compiled_ui_folder, recurse=True)
+    compileUiDir(ui_folder, recurse=True)
 
 
 @task(compile_ui)
