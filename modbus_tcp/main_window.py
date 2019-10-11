@@ -21,25 +21,21 @@ class MainWindow(QMainWindow):
 
     def connectButtonClicked(self):
         if(self.inputDataFieldsValid()):
-            master_ip = self.gui.master_ip_lineEdit.text()
             coupler_ip = self.gui.coupler_ip_lineEdit.text()
             port = self.gui.port_lineEdit.text()
             
-            connectivity.connectToModbus(master_ip, coupler_ip, port)
-
+            self.modbus_connection = connectivity.Modbus(coupler_ip, port)
+            self.modbus_connection.start()
 
     def inputDataFieldsValid(self):
-        master_ip = self.gui.master_ip_lineEdit.text()
         coupler_ip = self.gui.coupler_ip_lineEdit.text()
         port = self.gui.port_lineEdit.text()
 
-        master_ip_valid = data_format.isIpAdress(master_ip)
         coupler_ip_valid = data_format.isIpAdress(coupler_ip)
         port_valid = data_format.isPort(port)
 
         # output to user which field is not valid
-        if not master_ip_valid : self.gui.master_ip_lineEdit.setText("non valid ip adress") 
         if not coupler_ip_valid : self.gui.coupler_ip_lineEdit.setText("non valid ip adress")
         if not port_valid : self.gui.port_lineEdit.setText("non valid port value")
 
-        return master_ip_valid and coupler_ip_valid and port_valid
+        return coupler_ip_valid and port_valid

@@ -157,7 +157,7 @@
         </item>
         <item>
          <widget class="QLineEdit" name="master_ip_lineEdit">
-          <property name="enabled">
+          <property name="disabled">
            <bool>true</bool>
           </property>
           <property name="sizePolicy">
@@ -221,7 +221,7 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string>552</string>
+           <string>502</string>
           </property>
          </widget>
         </item>
