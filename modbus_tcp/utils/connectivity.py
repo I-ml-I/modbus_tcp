@@ -22,6 +22,9 @@ class Modbus(QObject):
         thread.setDaemon(None)
         thread.start()
 
+    def stop(self):
+        self.running = False
+
     def run(self):
         socket_tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 

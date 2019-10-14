@@ -36,6 +36,9 @@ class MainWindow(QMainWindow):
             self.modbus_connection.communication.updateUI.connect(self.updateUI)
             self.modbus_connection.start()
 
+    def closeEvent(self, event):
+        self.modbus_connection.stop()
+
     def inputDataFieldsValid(self):
         coupler_ip = self.gui.coupler_ip_lineEdit.text()
         port = self.gui.port_lineEdit.text()
