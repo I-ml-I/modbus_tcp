@@ -17,6 +17,7 @@ class MainWindow(QMainWindow):
 
         self.gui.connect_button.clicked.connect(self.connect_button_clicked)
         self.gui.disconnect_button.clicked.connect(self.disconnect_button_clicked)
+        self.gui.relay_1_check_box.clicked.connect(self.check_box_clicked)
 
         self.modbus_connection = None
         self.ui_elements_refnames = {'connect_button' : self.gui.connect_button,
@@ -31,6 +32,9 @@ class MainWindow(QMainWindow):
 
     def show_master_device_ip(self):
         self.gui.master_ip_line_edit.setText(network_status.get_ip_adress())
+
+    def check_box_clicked(self):
+        self.modbus_connection.send_data(b'\x00\x39\x00\x00\x00\x06\x01\x05\x40\x00\xFF\x00')
 
     def connect_button_clicked(self):
         if(self.input_data_fields_valid()):

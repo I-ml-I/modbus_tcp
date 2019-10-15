@@ -27,7 +27,7 @@ class Modbus(QObject):
 
     def run(self):
         socket_tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        socket_tcp.settimeout(5)
+        socket_tcp.settimeout('')
 
         # connecting
         try:
@@ -59,7 +59,7 @@ class Modbus(QObject):
 
         socket_tcp.close()
 
-    def sendData(self, data):
+    def send_data(self, data):
         self.data_to_send = data
 
     def update_ui_status(self, connected):
