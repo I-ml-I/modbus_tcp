@@ -52,7 +52,7 @@
        <enum>QLayout::SetDefaultConstraint</enum>
       </property>
       <item>
-       <widget class="QCheckBox" name="relay_1_checkBox">
+       <widget class="QCheckBox" name="relay_1_check_box">
         <property name="enabled">
          <bool>false</bool>
         </property>
@@ -68,7 +68,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QCheckBox" name="relay_2_checkBox">
+       <widget class="QCheckBox" name="relay_2_check_box">
         <property name="enabled">
          <bool>false</bool>
         </property>
@@ -84,7 +84,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QCheckBox" name="relay_3_checkBox">
+       <widget class="QCheckBox" name="relay_3_check_box">
         <property name="enabled">
          <bool>false</bool>
         </property>
@@ -100,7 +100,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QCheckBox" name="relay_4_checkBox">
+       <widget class="QCheckBox" name="relay_4_check_box">
         <property name="enabled">
          <bool>false</bool>
         </property>
@@ -136,7 +136,7 @@
        <x>10</x>
        <y>20</y>
        <width>201</width>
-       <height>109</height>
+       <height>117</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -156,15 +156,18 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="master_ip_lineEdit">
-          <property name="disabled">
-           <bool>true</bool>
+         <widget class="QLineEdit" name="master_ip_line_edit">
+          <property name="enabled">
+           <bool>false</bool>
           </property>
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="disabled" stdset="0">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -186,7 +189,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="coupler_ip_lineEdit">
+         <widget class="QLineEdit" name="coupler_ip_line_edit">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -213,7 +216,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="port_lineEdit">
+         <widget class="QLineEdit" name="port_line_edit">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -227,18 +230,38 @@
         </item>
        </layout>
       </item>
-      <item alignment="Qt::AlignHCenter">
-       <widget class="QPushButton" name="connect_button">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string>Connect</string>
-        </property>
-       </widget>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_4">
+        <item>
+         <widget class="QPushButton" name="connect_button">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Connect</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="disconnect_button">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Disconnect</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
      </layout>
     </widget>
@@ -255,7 +278,7 @@
     <property name="title">
      <string>Inspect comunication</string>
     </property>
-    <widget class="QPlainTextEdit" name="communication_inspector_textEdit">
+    <widget class="QPlainTextEdit" name="communication_inspector_text_edit">
      <property name="enabled">
       <bool>false</bool>
      </property>

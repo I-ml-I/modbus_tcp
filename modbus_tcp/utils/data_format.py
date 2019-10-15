@@ -1,4 +1,4 @@
-def isPort(port_str):    
+def is_port(port_str):    
     try:
         port = int(port_str)
     except ValueError:
@@ -8,7 +8,7 @@ def isPort(port_str):
     else: return True
 
 
-def isIpAdress(ip_adress_str):
+def is_ip_adress(ip_adress_str):
     ip_split = ip_adress_str.split('.')
 
     if(len(ip_split) is 4):
