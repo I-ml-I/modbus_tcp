@@ -2,9 +2,12 @@ from modbus_tcp.compiled_ui.modbus_window import Ui_MainWindow
 from modbus_tcp.utils import network_status
 from modbus_tcp.utils import connectivity
 from modbus_tcp.utils import data_format
+from modbus_tcp.utils import modbus_packet
+from modbus_tcp.utils import relay_state
 from PySide2.QtWidgets import QMainWindow
 from PySide2.QtWidgets import QPlainTextEdit
 from PySide2.QtWidgets import QPushButton
+from PySide2.QtWidgets import QCheckBox
 from PySide2.QtCore import Slot
 
 class MainWindow(QMainWindow):
@@ -18,6 +21,9 @@ class MainWindow(QMainWindow):
         self.gui.connect_button.clicked.connect(self.connect_button_clicked)
         self.gui.disconnect_button.clicked.connect(self.disconnect_button_clicked)
         self.gui.relay_1_check_box.clicked.connect(self.check_box_clicked)
+        self.gui.relay_2_check_box.clicked.connect(self.check_box_clicked)
+        self.gui.relay_3_check_box.clicked.connect(self.check_box_clicked)
+        self.gui.relay_4_check_box.clicked.connect(self.check_box_clicked)
 
         self.modbus_connection = None
         self.ui_elements_refnames = {'connect_button' : self.gui.connect_button,
@@ -34,7 +40,19 @@ class MainWindow(QMainWindow):
         self.gui.master_ip_line_edit.setText(network_status.get_ip_adress())
 
     def check_box_clicked(self):
-        self.modbus_connection.send_data(b'\x00\x39\x00\x00\x00\x06\x01\x05\x40\x00\xFF\x00')
+        '''Function sends Modbus packet containing check box states'''
+
+        relay_1_state = self.gui.relay_1_check_box.isChecked()
+        relay_2_state = self.gui.relay_2_check_box.isChecked()
+        relay_3_state = self.gui.relay_3_check_box.isChecked()
+        relay_4_state = self.gui.relay_4_check_box.isChecked()
+
+        output_registar_value = relay_state.relay_states_registar_value([relay_1_state, relay_2_state,
+                                                                       relay_3_state, relay_4_state])
+
+        packet = modbus_packet.ModbusPacket(6, 0x0400, output_registar_value)
+
+        self.modbus_connection.send_data(packet.pack())
 
     def connect_button_clicked(self):
         if(self.input_data_fields_valid()):
@@ -46,7 +64,8 @@ class MainWindow(QMainWindow):
             self.modbus_connection.start()
 
     def disconnect_button_clicked(self):
-        self.modbus_connection.stop()
+        if  self.modbus_connection is not None:
+            self.modbus_connection.stop()
 
     def input_data_fields_valid(self):
         coupler_ip = self.gui.coupler_ip_line_edit.text()
@@ -74,12 +93,15 @@ class MainWindow(QMainWindow):
                 if isinstance(state, bool):
                     widget.setEnabled(state)
 
-                if isinstance(widget, QPlainTextEdit):
+                elif isinstance(widget, QPlainTextEdit):
                     widget.appendPlainText(state)
 
+                elif isinstance(widget, QCheckBox):
+                    if isinstance(state, int):
+                        if state == 0 : widget.setChecked(False)
+                        if state == 1 : widget.setChecked(True)
             else:
                 print("error : ui element referenced by non existing name")
-
 
     def closeEvent(self, event):
         self.modbus_connection.stop()
