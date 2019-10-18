@@ -3,8 +3,8 @@ import threading
 import time
 from PySide2.QtCore import QObject
 from PySide2.QtCore import Signal
-from modbus_tcp.utils.modbus_packet import ModbusPacket
-from modbus_tcp.utils import relay_state
+from utils.modbus_packet import ModbusPacket
+from utils import relay_state
 
 class Modbus(QObject):
     updateUI = Signal(dict)

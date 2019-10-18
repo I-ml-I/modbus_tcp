@@ -1,14 +1,16 @@
-from modbus_tcp.compiled_ui.modbus_window import Ui_MainWindow
-from modbus_tcp.utils import network_status
-from modbus_tcp.utils import connectivity
-from modbus_tcp.utils import data_format
-from modbus_tcp.utils import modbus_packet
-from modbus_tcp.utils import relay_state
+
 from PySide2.QtWidgets import QMainWindow
 from PySide2.QtWidgets import QPlainTextEdit
 from PySide2.QtWidgets import QPushButton
 from PySide2.QtWidgets import QCheckBox
 from PySide2.QtCore import Slot
+
+from compiled_ui.modbus_window import Ui_MainWindow
+from utils import network_status
+from utils import connectivity
+from utils import data_format
+from utils import modbus_packet
+from utils import relay_state
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
@@ -104,4 +106,5 @@ class MainWindow(QMainWindow):
                 print("error : ui element referenced by non existing name")
 
     def closeEvent(self, event):
-        self.modbus_connection.stop()
+        if self.modbus_connection is not None:
+            self.modbus_connection.stop()
