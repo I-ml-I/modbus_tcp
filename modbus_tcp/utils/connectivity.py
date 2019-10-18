@@ -94,7 +94,7 @@ class Modbus(QObject):
         self.data_to_send = data
 
     def update_relays_statuses_with_response(self, response):
-        '''Function updates check boxes with current state of relays'''3
+        '''Function updates check boxes with current state of relays'''
         
         rx_packet = ModbusPacket(packet=response)
 
